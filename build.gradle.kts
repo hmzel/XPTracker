@@ -1,14 +1,14 @@
 import dev.architectury.pack200.java.Pack200Adapter
 
 plugins {
-    kotlin("jvm")
     id("gg.essential.loom")
     id("io.github.juuxel.loom-quiltflower")
     id("dev.architectury.architectury-pack200")
     id("com.github.johnrengelman.shadow")
+    java
 }
 
-group = "dev.debuggings"
+group = "hm.zelha"
 version = "1.0.0"
 
 loom {
@@ -21,13 +21,13 @@ loom {
     launchConfigs {
         getByName("client") {
             arg("--tweakClass", "gg.essential.loader.stage0.EssentialSetupTweaker")
-            arg("--mixin", "mixins.examplemod.json")
+            arg("--mixin", "mixins.xptracker.json")
         }
     }
 
     forge {
         pack200Provider.set(Pack200Adapter())
-        mixinConfig("mixins.examplemod.json")
+        mixinConfig("mixins.xptracker.json")
     }
 }
 
@@ -44,11 +44,14 @@ dependencies {
 
     compileOnly("org.spongepowered:mixin:0.8.5-SNAPSHOT")
     annotationProcessor("org.spongepowered:mixin:0.8.5-SNAPSHOT:processor")
+
+    modRuntimeOnly("me.djtheredstoner:DevAuth-forge-legacy:1.1.2")
 }
 
 repositories {
     maven("https://repo.essential.gg/repository/maven-public")
     maven("https://repo.spongepowered.org/repository/maven-public")
+    maven("https://pkgs.dev.azure.com/djtheredstoner/DevAuth/_packaging/public/maven/v1")
 }
 
 tasks {
@@ -59,7 +62,7 @@ tasks {
             mapOf(
                 "ModSide" to "CLIENT",
                 "TweakClass" to "gg.essential.loader.stage0.EssentialSetupTweaker",
-                "MixinConfigs" to "mixins.examplemod.json"
+                "MixinConfigs" to "mixins.xptracker.json"
             )
         )
     }

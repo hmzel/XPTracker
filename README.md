@@ -1,6 +1,10 @@
-# ExampleMod
-Template mod with Mixins and Essential.
+# XPTracker
+Tracks your Pit XP.
 
+## Credits
+- [Debug's example mod](https://github.com/Debuggingss/ExampleMod/)
+
+## Build it yourself
 ### Set project SDK to Java 17+ 
 ```
 1) Ctrl + Shift + Alt + S
