@@ -46,6 +46,9 @@ dependencies {
     annotationProcessor("org.spongepowered:mixin:0.8.5-SNAPSHOT:processor")
 
     modRuntimeOnly("me.djtheredstoner:DevAuth-forge-legacy:1.1.2")
+
+    compileOnly("org.projectlombok:lombok:1.18.28")
+    annotationProcessor("org.projectlombok:lombok:1.18.28")
 }
 
 repositories {
