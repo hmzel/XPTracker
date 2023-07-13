@@ -1,5 +1,7 @@
 package hm.zelha.xptracker;
 
+import hm.zelha.xptracker.commands.ConfigCommand;
+import hm.zelha.xptracker.core.Config;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
 
@@ -15,6 +17,7 @@ public class XPTracker {
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
-        System.out.println("init!");
+        Config.INSTANCE.preload();
+        new ConfigCommand().register();
     }
 }

@@ -41,6 +41,7 @@ dependencies {
 
     compileOnly("gg.essential:essential-1.8.9-forge:4955+g395141645")
     embed("gg.essential:loader-launchwrapper:1.1.3")
+    implementation("gg.essential:vigilance-1.8.9-forge:259")
 
     compileOnly("org.spongepowered:mixin:0.8.5-SNAPSHOT")
     annotationProcessor("org.spongepowered:mixin:0.8.5-SNAPSHOT:processor")
