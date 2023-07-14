@@ -1,11 +1,15 @@
 import dev.architectury.pack200.java.Pack200Adapter
 
 plugins {
+    kotlin("jvm")
     id("gg.essential.loom")
     id("io.github.juuxel.loom-quiltflower")
     id("dev.architectury.architectury-pack200")
     id("com.github.johnrengelman.shadow")
     java
+
+    kotlin("plugin.lombok") version "1.9.0"
+    id("io.freefair.lombok") version "8.1.0"
 }
 
 group = "hm.zelha"
@@ -41,15 +45,17 @@ dependencies {
 
     compileOnly("gg.essential:essential-1.8.9-forge:4955+g395141645")
     embed("gg.essential:loader-launchwrapper:1.1.3")
+
     implementation("gg.essential:vigilance-1.8.9-forge:259")
+    implementation("gg.essential:elementa-1.8.9-forge:500")
 
     compileOnly("org.spongepowered:mixin:0.8.5-SNAPSHOT")
     annotationProcessor("org.spongepowered:mixin:0.8.5-SNAPSHOT:processor")
 
     modRuntimeOnly("me.djtheredstoner:DevAuth-forge-legacy:1.1.2")
 
-    compileOnly("org.projectlombok:lombok:1.18.28")
-    annotationProcessor("org.projectlombok:lombok:1.18.28")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.8.1")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.8.1")
 }
 
 repositories {
@@ -59,6 +65,10 @@ repositories {
 }
 
 tasks {
+    test {
+        useJUnitPlatform()
+    }
+
     jar {
         from(embed.files.map { zipTree(it) })
 
