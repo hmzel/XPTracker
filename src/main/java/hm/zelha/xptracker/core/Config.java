@@ -35,5 +35,6 @@ public class Config extends Vigilant {
 
     public Config() {
         super(new File("./config/xptracker.toml"));
+        initialize();
     }
 }
