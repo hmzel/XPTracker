@@ -15,7 +15,7 @@ public class Config extends Vigilant {
         description = "Whether or not the mod is enabled.",
         category = "General"
     )
-    public boolean enabled = true;
+    public boolean enabled = false;
 
     public Config() {
         super(new File("./config/xptracker.toml"));
