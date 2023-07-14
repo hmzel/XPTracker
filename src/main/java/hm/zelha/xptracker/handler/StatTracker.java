@@ -105,7 +105,11 @@ public class StatTracker {
             .collect(Collectors.toList());
     }
 
-    private boolean isPlayingPit() {
+    /**
+     * Checks if the player is currently playing The Pit
+     * @return If the player is currently playing The Pit
+     */
+    public boolean isPlayingPit() {
         @Nullable World world = Minecraft.getMinecraft().theWorld;
         if (world == null) return false;
         @Nullable Scoreboard scoreboard = world.getScoreboard();

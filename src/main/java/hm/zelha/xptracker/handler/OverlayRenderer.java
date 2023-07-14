@@ -20,23 +20,27 @@ public class OverlayRenderer {
     @SubscribeEvent
     public void onRender(RenderGameOverlayEvent.Pre event) {
         if (event.type != RenderGameOverlayEvent.ElementType.TEXT) return;
-        if (!Config.INSTANCE.enabled) return;
+        if (isInactive()) return;
         window.draw();
     }
 
     @SubscribeEvent
     public void onMouseClick(GUIMouseEvent.Clicked event) {
-        if (!Config.INSTANCE.enabled) return;
+        if (isInactive()) return;
         window.mouseClick(event.x, event.y, event.button);
     }
 
     @SubscribeEvent
     public void onMouseRelease(GUIMouseEvent.Released event) {
-        if (!Config.INSTANCE.enabled) return;
+        if (isInactive()) return;
         window.mouseRelease();
     }
 
     public void update() {
         overlay.update();
+    }
+
+    private boolean isInactive() {
+        return !Config.INSTANCE.enabled || (Config.INSTANCE.onlyRenderInPit && !StatTracker.INSTANCE.isPlayingPit());
     }
 }

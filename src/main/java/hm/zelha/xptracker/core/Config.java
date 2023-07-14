@@ -18,6 +18,14 @@ public class Config extends Vigilant {
     public boolean enabled = false;
 
     @Property(
+        type = PropertyType.SWITCH,
+        name = "Only render in Pit",
+        description = "Whether or not the overlay should only be shown in pit.",
+        category = "General"
+    )
+    public boolean onlyRenderInPit = true;
+
+    @Property(
         type = PropertyType.DECIMAL_SLIDER,
         name = "X",
         category = "General",
