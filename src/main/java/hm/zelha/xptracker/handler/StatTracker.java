@@ -1,8 +1,8 @@
 package hm.zelha.xptracker.handler;
 
 import hm.zelha.xptracker.core.Config;
+import hm.zelha.xptracker.core.event.PitXPUpdateEvent;
 import hm.zelha.xptracker.util.RomanNumerals;
-import hm.zelha.xptracker.util.XPCalculator;
 import lombok.Getter;
 import net.minecraft.client.Minecraft;
 import net.minecraft.scoreboard.ScoreObjective;
@@ -10,6 +10,7 @@ import net.minecraft.scoreboard.ScorePlayerTeam;
 import net.minecraft.scoreboard.Scoreboard;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.common.gameevent.TickEvent;
 import org.jetbrains.annotations.NotNull;
@@ -27,10 +28,9 @@ public class StatTracker {
     private static final Pattern PRESTIGE_PATTERN = Pattern.compile("^Prestige: (?<value>\\w+)$");
     private static final Pattern NEEDED_XP_PATTERN = Pattern.compile("^Needed XP: (?<value>[\\d,]+|MAXED)$");
 
-    @Getter private String xpString = "";
     @Getter private int prestige = 0;
     @Getter private int level = 0;
-    @Getter private int xpToNextLevel = 0;
+    @Getter private double xpToNextLevel = 0;
 
     @SubscribeEvent
     public void onTick(TickEvent.ClientTickEvent event) {
@@ -46,30 +46,29 @@ public class StatTracker {
         String neededXPRaw = getScoreboardValue(lines, NEEDED_XP_PATTERN);
         if (levelRaw == null || neededXPRaw == null) return;
 
-        prestige = RomanNumerals.getIntFromNumeral(prestigeRaw);
-        level = Integer.parseInt(levelRaw);
+        int newPrestige = RomanNumerals.getIntFromNumeral(prestigeRaw);
+        int newLevel = Integer.parseInt(levelRaw);
 
-        int newXpToNextLevel;
+        double newXpToNextLevel;
         if (neededXPRaw.equals("MAXED")) {
             newXpToNextLevel = 0;
         } else {
-            newXpToNextLevel = Integer.parseInt(neededXPRaw.replace(",", ""));
+            newXpToNextLevel = Double.parseDouble(neededXPRaw.replace(",", ""));
         }
 
-        if (xpToNextLevel == newXpToNextLevel) return; // Don't update if the value hasn't changed
+        if (xpToNextLevel == newXpToNextLevel && prestige == newPrestige && level == newLevel) return;
+        MinecraftForge.EVENT_BUS.post(new PitXPUpdateEvent(
+            prestige,
+            level,
+            xpToNextLevel,
+            newPrestige,
+            newLevel,
+            newXpToNextLevel
+        ));
+
+        prestige = newPrestige;
+        level = newLevel;
         xpToNextLevel = newXpToNextLevel;
-        calculate();
-    }
-
-    private void calculate() {
-        double requiredXPForNextPrestige = XPCalculator.getTotalPrestigeXP(prestige);
-        double currentPrestigeXP = XPCalculator.getTotalXPForLevelAtPrestige(prestige, level);
-        double neededXPForNextLevel = XPCalculator.getNeededXPForLevel(prestige, level + 1);
-        currentPrestigeXP = currentPrestigeXP + neededXPForNextLevel - xpToNextLevel;
-
-        double percent = currentPrestigeXP / requiredXPForNextPrestige;
-        xpString = String.format("%.0f/%.0f  %.0f%%", currentPrestigeXP, requiredXPForNextPrestige, percent * 100);
-        OverlayRenderer.INSTANCE.update();
     }
 
     @Nullable
@@ -107,6 +106,7 @@ public class StatTracker {
 
     /**
      * Checks if the player is currently playing The Pit
+     *
      * @return If the player is currently playing The Pit
      */
     public boolean isPlayingPit() {

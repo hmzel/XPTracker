@@ -46,17 +46,6 @@ public class XPCalculator {
     }
 
     /**
-     * Calculate the needed XP to the specified prestige and level from the previous level.
-     *
-     * @param prestige The prestige to calculate with.
-     * @param level    The level to calculate the needed xp for.
-     * @return The needed XP for the specified level and level.
-     */
-    public static double getNeededXPForLevel(int prestige, int level) {
-        return Math.ceil(BASE_LEVEL_XP.get(level / 10) * XP_MULTIPLIERS.get(prestige));
-    }
-
-    /**
      * Calculates the XP required to level up from level zero prestige zero to the specified level at the specified prestige.
      *
      * @param prestige The prestige to calculate with.
@@ -81,6 +70,32 @@ public class XPCalculator {
      */
     public static double getTotalXPForLevelAtPrestige(int prestige, int level) {
         return getTotalXPForLevel(prestige, level) - getTotalXPForLevel(prestige, 0);
+    }
+
+    /**
+     * Calculates the XP required to level up from level 0 and specified prestige to the specified level
+     * at the specified prestige with the specified needed xp to the next level.
+     * This is mostly used to convert all the scoreboard data into the current prestige XP.
+     *
+     * @param prestige      The prestige to calculate with.
+     * @param level         The level to calculate the total XP up to.
+     * @param xpToNextLevel The XP needed to level up to the next level.
+     * @return The XP required to level up from level 0 and specified prestige to the specified level.
+     */
+    public static double getTotalXPForLevelAtPrestige(int prestige, int level, double xpToNextLevel) {
+        double neededXPForNextLevel = getNeededXPForLevel(prestige, level + 1);
+        return getTotalXPForLevelAtPrestige(prestige, level) + neededXPForNextLevel - xpToNextLevel;
+    }
+
+    /**
+     * Calculate the needed XP to the specified prestige and level from the previous level.
+     *
+     * @param prestige The prestige to calculate with.
+     * @param level    The level to calculate the needed xp for.
+     * @return The needed XP for the specified level and level.
+     */
+    public static double getNeededXPForLevel(int prestige, int level) {
+        return Math.ceil(BASE_LEVEL_XP.get(level / 10) * XP_MULTIPLIERS.get(prestige));
     }
 
     @NotNull

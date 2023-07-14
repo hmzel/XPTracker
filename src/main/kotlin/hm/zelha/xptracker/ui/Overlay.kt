@@ -10,11 +10,11 @@ import gg.essential.elementa.dsl.pixels
 import gg.essential.elementa.dsl.provideDelegate
 import gg.essential.universal.UKeyboard
 import hm.zelha.xptracker.core.Config
-import hm.zelha.xptracker.handler.StatTracker
+import hm.zelha.xptracker.util.XPCalculator
 
 class Overlay : UIContainer() {
     private var isDragging = false
-    private var dragOffset= 0f to 0f
+    private var dragOffset = 0f to 0f
     private val text by UIText("Prestige Progress") childOf this
 
     init {
@@ -56,7 +56,11 @@ class Overlay : UIContainer() {
         }
     }
 
-    fun update() {
-        text.setText(StatTracker.INSTANCE.xpString)
+    fun update(prestige: Int, level: Int, neededXP: Double) {
+        val currentPrestigeXP = XPCalculator.getTotalXPForLevelAtPrestige(prestige, level, neededXP)
+        val currentPrestigeRequiredXP = XPCalculator.getTotalPrestigeXP(prestige)
+        val percent = currentPrestigeXP / currentPrestigeRequiredXP
+        val xpString = String.format("%.0f/%.0f  %.0f%%", currentPrestigeXP, currentPrestigeRequiredXP, percent * 100)
+        text.setText(xpString)
     }
 }

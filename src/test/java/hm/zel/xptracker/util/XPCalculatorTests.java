@@ -27,7 +27,12 @@ class XPCalculatorTests {
     }
 
     @Test
-    void testGetNeededXPForLevel() {
+    void testTotalXPForLevelAtPrestigeNeededXP() {
+        assertEquals(48297, XPCalculator.getTotalXPForLevelAtPrestige(3, 98, 1053));
+    }
+
+    @Test
+    void testNeededXPForLevel() {
         assertEquals(1300, XPCalculator.getNeededXPForLevel(3, 99));
         assertEquals(27, XPCalculator.getNeededXPForLevel(6, 3));
         assertEquals(1300, XPCalculator.getNeededXPForLevel(3, 99));

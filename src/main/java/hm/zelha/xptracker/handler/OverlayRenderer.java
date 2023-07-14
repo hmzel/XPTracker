@@ -4,6 +4,7 @@ import gg.essential.elementa.ElementaVersion;
 import gg.essential.elementa.components.Window;
 import hm.zelha.xptracker.core.Config;
 import hm.zelha.xptracker.core.event.GUIMouseEvent;
+import hm.zelha.xptracker.core.event.PitXPUpdateEvent;
 import hm.zelha.xptracker.ui.Overlay;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
@@ -36,8 +37,9 @@ public class OverlayRenderer {
         window.mouseRelease();
     }
 
-    public void update() {
-        overlay.update();
+    @SubscribeEvent
+    public void onXPUpdate(PitXPUpdateEvent event) {
+        overlay.update(event.prestige, event.level, event.xpToNextLevel);
     }
 
     private boolean isInactive() {
