@@ -1,8 +1,6 @@
 {
     "compatibilityLevel": "JAVA_8",
     "package": "hm.zelha.xptracker.mixins",
-    "client": [
-        "MixinMinecraft"
-    ],
+    "client": [],
     "verbose": true
 }
