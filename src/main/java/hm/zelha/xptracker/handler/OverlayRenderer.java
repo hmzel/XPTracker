@@ -2,6 +2,7 @@ package hm.zelha.xptracker.handler;
 
 import gg.essential.elementa.ElementaVersion;
 import gg.essential.elementa.components.Window;
+import gg.essential.universal.UMatrixStack;
 import hm.zelha.xptracker.core.Config;
 import hm.zelha.xptracker.core.event.GUIMouseEvent;
 import hm.zelha.xptracker.core.event.PitXPUpdateEvent;
@@ -22,7 +23,7 @@ public class OverlayRenderer {
     public void onRender(RenderGameOverlayEvent.Pre event) {
         if (event.type != RenderGameOverlayEvent.ElementType.TEXT) return;
         if (isInactive()) return;
-        window.draw();
+        window.draw(new UMatrixStack());
     }
 
     @SubscribeEvent
