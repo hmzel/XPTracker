@@ -1,9 +1,9 @@
 package hm.zelha.xptracker;
 
-import hm.zelha.xptracker.commands.ConfigCommand;
+import hm.zelha.xptracker.command.ConfigCommand;
 import hm.zelha.xptracker.core.Config;
-import hm.zelha.xptracker.handlers.PrestigeProgressRenderer;
-import hm.zelha.xptracker.handlers.StatTracker;
+import hm.zelha.xptracker.handler.OverlayRenderer;
+import hm.zelha.xptracker.handler.StatTracker;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.event.FMLInitializationEvent;
@@ -26,6 +26,6 @@ public class XPTracker {
         Config.INSTANCE.preload();
         new ConfigCommand().register();
         MinecraftForge.EVENT_BUS.register(StatTracker.INSTANCE);
-        MinecraftForge.EVENT_BUS.register(PrestigeProgressRenderer.INSTANCE);
+        MinecraftForge.EVENT_BUS.register(OverlayRenderer.INSTANCE);
     }
 }

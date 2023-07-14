@@ -17,6 +17,22 @@ public class Config extends Vigilant {
     )
     public boolean enabled = false;
 
+    @Property(
+        type = PropertyType.DECIMAL_SLIDER,
+        name = "X",
+        category = "General",
+        hidden = true
+    )
+    public float x = 8;
+
+    @Property(
+        type = PropertyType.DECIMAL_SLIDER,
+        name = "Y",
+        category = "General",
+        hidden = true
+    )
+    public float y = 8;
+
     public Config() {
         super(new File("./config/xptracker.toml"));
     }

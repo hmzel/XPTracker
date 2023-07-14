@@ -1,5 +1,6 @@
-package hm.zelha.xptracker.handlers;
+package hm.zelha.xptracker.handler;
 
+import hm.zelha.xptracker.core.Config;
 import hm.zelha.xptracker.util.RomanNumerals;
 import hm.zelha.xptracker.util.XPCalculator;
 import lombok.Getter;
@@ -34,6 +35,7 @@ public class StatTracker {
     @SubscribeEvent
     public void onTick(TickEvent.ClientTickEvent event) {
         if (event.phase != TickEvent.Phase.END) return;
+        if (!Config.INSTANCE.enabled) return;
         if (!isPlayingPit()) return;
 
         @Nullable List<String> lines = getScoreboardLines();
@@ -67,7 +69,7 @@ public class StatTracker {
 
         double percent = currentPrestigeXP / requiredXPForNextPrestige;
         xpString = String.format("%.0f/%.0f  %.0f%%", currentPrestigeXP, requiredXPForNextPrestige, percent * 100);
-        PrestigeProgressRenderer.INSTANCE.update();
+        OverlayRenderer.INSTANCE.update();
     }
 
     @Nullable

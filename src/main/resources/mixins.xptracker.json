@@ -1,6 +1,8 @@
 {
     "compatibilityLevel": "JAVA_8",
-    "package": "hm.zelha.xptracker.mixins",
-    "client": [],
+    "package": "hm.zelha.xptracker.mixin",
+    "client": [
+        "event.MixinGuiScreen"
+    ],
     "verbose": true
 }

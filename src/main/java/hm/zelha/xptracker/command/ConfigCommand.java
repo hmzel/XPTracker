@@ -1,4 +1,4 @@
-package hm.zelha.xptracker.commands;
+package hm.zelha.xptracker.command;
 
 import gg.essential.api.EssentialAPI;
 import gg.essential.api.commands.Command;
