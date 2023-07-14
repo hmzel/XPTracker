@@ -28,6 +28,7 @@ public class StatTracker {
     private static final Pattern PRESTIGE_PATTERN = Pattern.compile("^Prestige: (?<value>\\w+)$");
     private static final Pattern NEEDED_XP_PATTERN = Pattern.compile("^Needed XP: (?<value>[\\d,]+|MAXED)$");
 
+    @Getter private String prestigeRoman = "";
     @Getter private int prestige = 0;
     @Getter private int level = 0;
     @Getter private double xpToNextLevel = 0;
@@ -57,18 +58,20 @@ public class StatTracker {
         }
 
         if (xpToNextLevel == newXpToNextLevel && prestige == newPrestige && level == newLevel) return;
-        MinecraftForge.EVENT_BUS.post(new PitXPUpdateEvent(
+        PitXPUpdateEvent xpEvent = new PitXPUpdateEvent(
             prestige,
             level,
             xpToNextLevel,
             newPrestige,
             newLevel,
             newXpToNextLevel
-        ));
+        );
 
+        prestigeRoman = prestigeRaw == null ? "0" : prestigeRaw;
         prestige = newPrestige;
         level = newLevel;
         xpToNextLevel = newXpToNextLevel;
+        MinecraftForge.EVENT_BUS.post(xpEvent);
     }
 
     @Nullable

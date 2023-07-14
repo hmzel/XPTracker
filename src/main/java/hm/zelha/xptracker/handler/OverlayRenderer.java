@@ -39,7 +39,7 @@ public class OverlayRenderer {
 
     @SubscribeEvent
     public void onXPUpdate(PitXPUpdateEvent event) {
-        overlay.update(event.prestige, event.level, event.xpToNextLevel);
+        overlay.updateAll(event.prestige, event.level, event.xpToNextLevel);
     }
 
     private boolean isInactive() {
