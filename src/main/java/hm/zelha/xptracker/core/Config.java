@@ -21,7 +21,7 @@ public class Config extends Vigilant {
         type = PropertyType.SWITCH,
         name = "Only render in Pit",
         description = "Whether or not the overlay should only be shown in pit.",
-        category = "General"
+        category = "Overlay"
     )
     public boolean onlyRenderInPit = true;
 
@@ -29,7 +29,7 @@ public class Config extends Vigilant {
         type = PropertyType.SWITCH,
         name = "Prestige Progression",
         description = "Whether or not the overlay should show prestige progression.",
-        category = "General"
+        category = "Overlay"
     )
     public boolean prestigeProgression = true;
 
@@ -39,7 +39,7 @@ public class Config extends Vigilant {
         description = "The format of the prestige progression text.\n" +
             "Formatting codes can be used.\n" +
             "Variables: %prestige%, %prestige_roman%, %prestige_xp%, %prestige_xp_needed%, %prestige_xp_progress%.",
-        category = "General"
+        category = "Overlay"
     )
     public String prestigeProgressionFormat = "&7[&f%prestige_roman%&7] &a%prestige_xp%&7/&b%prestige_xp_needed% &7(&d%prestige_xp_progress%%&7)";
 
@@ -48,7 +48,7 @@ public class Config extends Vigilant {
         type = PropertyType.SWITCH,
         name = "Level Progression",
         description = "Whether or not the overlay should show level progression.",
-        category = "General"
+        category = "Overlay"
     )
     public boolean levelProgression = true;
 
@@ -58,14 +58,14 @@ public class Config extends Vigilant {
         description = "The format of the level progression text.\n" +
             "Formatting codes can be used.\n" +
             "Variables: %level%, %level_xp%, %level_xp_needed%, %level_xp_progress%.",
-        category = "General"
+        category = "Overlay"
     )
     public String levelProgressionFormat = "&7[&f%level%&7] &a%level_xp%&7/&b%level_xp_needed% &7(&d%level_xp_progress%%&7)";
 
     @Property(
         type = PropertyType.DECIMAL_SLIDER,
         name = "X",
-        category = "General",
+        category = "Overlay",
         hidden = true
     )
     public float x = 8;
@@ -73,7 +73,7 @@ public class Config extends Vigilant {
     @Property(
         type = PropertyType.DECIMAL_SLIDER,
         name = "Y",
-        category = "General",
+        category = "Overlay",
         hidden = true
     )
     public float y = 8;
