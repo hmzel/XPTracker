@@ -70,7 +70,6 @@ tasks {
     }
 
     jar {
-        archiveName = "XPTracker.jar"
         from(embed.files.map { zipTree(it) })
 
         manifest.attributes(
