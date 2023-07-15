@@ -116,7 +116,8 @@ class Overlay : UIContainer() {
                     "{prestige_xp}" to String.format("%,.0f", currentPrestigeXP),
                     "{prestige_xp_needed}" to String.format("%,.0f", currentPrestigeRequiredXP),
                     "{prestige_xp_progress}" to String.format("%.2f", prestigePercent * 100),
-                    "&" to "§"
+                    "&" to "§",
+                    "§l" to "" // For some reason using bold text breaks alignment, so we just remove it
                 )
             )
         )
@@ -142,7 +143,8 @@ class Overlay : UIContainer() {
                     "{level_xp}" to String.format("%,.0f", currentLevelXP),
                     "{level_xp_needed}" to String.format("%,.0f", currentLevelRequiredXP),
                     "{level_xp_progress}" to String.format("%.2f", levelPercent * 100),
-                    "&" to "§"
+                    "&" to "§",
+                    "§l" to "" // For some reason using bold text breaks alignment, so we just remove it
                 )
             )
         )
