@@ -44,6 +44,15 @@ public class Config extends Vigilant {
     public int chatProgressionDecimalPlaces = 2;
 
     @Property(
+        type = PropertyType.SELECTOR,
+        name = "Type",
+        description = "The type of XP progression message to show.",
+        category = "Chat Progression",
+        options = {"Level", "Prestige"}
+    )
+    public int chatProgressionType = 0;
+
+    @Property(
         type = PropertyType.SWITCH,
         name = "Only render in Pit",
         description = "Whether or not the overlay should only be shown in pit.",

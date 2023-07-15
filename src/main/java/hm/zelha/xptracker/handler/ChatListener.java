@@ -19,8 +19,15 @@ public class ChatListener {
         if (!matcher.matches()) return;
 
         int xp = Integer.parseInt(matcher.group("xp"));
-        double currentLevelRequiredXP = XPCalculator.getNeededXPForLevel(statTracker.getPrestige(), statTracker.getLevel());
-        double percent = xp / currentLevelRequiredXP;
+        double percent;
+
+        if (Config.INSTANCE.chatProgressionType == 0) { // 0 = Level
+            double currentLevelRequiredXP = XPCalculator.getNeededXPForLevel(statTracker.getPrestige(), statTracker.getLevel());
+            percent = xp / currentLevelRequiredXP;
+        } else { // 1 = Prestige
+            double currentPrestigeRequiredXP = XPCalculator.getTotalPrestigeXP(statTracker.getPrestige());
+            percent = xp / currentPrestigeRequiredXP;
+        }
 
         @SuppressWarnings("MalformedFormatString")
         String levelPercentString = String.format(
