@@ -92,10 +92,10 @@ public class Config extends Vigilant {
         name = "Level Progression Format",
         description = "The format of the level progression text.\n" +
             "Formatting codes can be used.\n" +
-            "Variables: {level}, {level_xp}, {level_xp_needed}, {level_xp_progress}.",
+            "Variables: {level}, {formatted_level}, {level_xp}, {level_xp_needed}, {level_xp_progress}.",
         category = "Overlay"
     )
-    public String levelProgressionFormat = "&7[&f{level}&7] &a{level_xp}&7/&b{level_xp_needed} &7(&d{level_xp_progress}%&7)";
+    public String levelProgressionFormat = "{formatted_level} &a{level_xp}&7/&b{level_xp_needed} &7(&d{level_xp_progress}%&7)";
 
     @Property(
         type = PropertyType.SELECTOR,

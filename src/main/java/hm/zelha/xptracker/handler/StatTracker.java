@@ -24,6 +24,7 @@ import java.util.stream.Collectors;
 
 public class StatTracker {
     public static final StatTracker INSTANCE = new StatTracker();
+    private static final Pattern FORMATTED_LEVEL_PATTERN = Pattern.compile("^Level: (?<value>.+)$");
     private static final Pattern LEVEL_PATTERN = Pattern.compile("^Level: \\[(?<value>\\d{1,3})]$");
     private static final Pattern PRESTIGE_PATTERN = Pattern.compile("^Prestige: (?<value>\\w+)$");
     private static final Pattern NEEDED_XP_PATTERN = Pattern.compile("^Needed XP: (?<value>[\\d,]+|MAXED)$");
@@ -31,6 +32,7 @@ public class StatTracker {
     @Getter private String prestigeRoman = "";
     @Getter private int prestige = 0;
     @Getter private int level = 0;
+    @Getter private String formattedLevel = "";
     @Getter private double xpToNextLevel = 0;
 
     @SubscribeEvent
@@ -39,13 +41,18 @@ public class StatTracker {
         if (!Config.INSTANCE.enabled) return;
         if (!isPlayingPit()) return;
 
-        @Nullable List<String> lines = getScoreboardLines();
-        if (lines == null) return;
+        @Nullable List<String> formattedLines = getScoreboardLines();
+        if (formattedLines == null) return;
+        List<String> lines = getScoreboardLines()
+            .stream()
+            .map(EnumChatFormatting::getTextWithoutFormattingCodes)
+            .collect(Collectors.toList());
 
         String prestigeRaw = getScoreboardValue(lines, PRESTIGE_PATTERN); // This can be null if the player has not prestiged
         String levelRaw = getScoreboardValue(lines, LEVEL_PATTERN);
         String neededXPRaw = getScoreboardValue(lines, NEEDED_XP_PATTERN);
-        if (levelRaw == null || neededXPRaw == null) return;
+        String newFormattedLevel = getScoreboardValue(formattedLines, FORMATTED_LEVEL_PATTERN);
+        if (levelRaw == null || neededXPRaw == null || formattedLevel == null) return;
 
         int newPrestige = RomanNumerals.getIntFromNumeral(prestigeRaw);
         int newLevel = Integer.parseInt(levelRaw);
@@ -61,15 +68,18 @@ public class StatTracker {
         PitXPUpdateEvent xpEvent = new PitXPUpdateEvent(
             prestige,
             level,
+            formattedLevel,
             xpToNextLevel,
             newPrestige,
             newLevel,
+            newFormattedLevel,
             newXpToNextLevel
         );
 
         prestigeRoman = prestigeRaw == null ? "0" : prestigeRaw;
         prestige = newPrestige;
         level = newLevel;
+        formattedLevel = newFormattedLevel;
         xpToNextLevel = newXpToNextLevel;
         MinecraftForge.EVENT_BUS.post(xpEvent);
     }
@@ -100,8 +110,7 @@ public class StatTracker {
             .map(score -> {
                 @Nullable ScorePlayerTeam scorePlayerTeam = scoreboard.getPlayersTeam(score.getPlayerName());
                 if (scorePlayerTeam == null) return null;
-                String formattedName = scorePlayerTeam.getColorPrefix() + scorePlayerTeam.getColorSuffix();
-                return EnumChatFormatting.getTextWithoutFormattingCodes(formattedName);
+                return scorePlayerTeam.getColorPrefix() + scorePlayerTeam.getColorSuffix();
             })
             .filter(Objects::nonNull)
             .collect(Collectors.toList());

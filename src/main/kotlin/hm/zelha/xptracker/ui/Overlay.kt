@@ -84,6 +84,7 @@ class Overlay : UIContainer() {
     fun updateAll(
         prestige: Int = StatTracker.INSTANCE.prestige,
         level: Int = StatTracker.INSTANCE.level,
+        formattedLevel: String = StatTracker.INSTANCE.formattedLevel,
         neededXP: Double = StatTracker.INSTANCE.xpToNextLevel
     ) {
         if (Config.INSTANCE.prestigeProgression) {
@@ -91,7 +92,7 @@ class Overlay : UIContainer() {
         }
 
         if (Config.INSTANCE.levelProgression) {
-            updateLevelProgressionText(prestige, level, neededXP)
+            updateLevelProgressionText(prestige, level, formattedLevel, neededXP)
         }
     }
 
@@ -124,6 +125,7 @@ class Overlay : UIContainer() {
     private fun updateLevelProgressionText(
         prestige: Int = StatTracker.INSTANCE.prestige,
         level: Int = StatTracker.INSTANCE.level,
+        formattedLevel: String = StatTracker.INSTANCE.formattedLevel,
         neededXP: Double = StatTracker.INSTANCE.xpToNextLevel,
         format: String = Config.INSTANCE.levelProgressionFormat
     ) {
@@ -136,6 +138,7 @@ class Overlay : UIContainer() {
                 format,
                 mapOf(
                     "{level}" to level.toString(),
+                    "{formatted_level}" to formattedLevel,
                     "{level_xp}" to String.format("%,.0f", currentLevelXP),
                     "{level_xp_needed}" to String.format("%,.0f", currentLevelRequiredXP),
                     "{level_xp_progress}" to String.format("%.2f", levelPercent * 100),
