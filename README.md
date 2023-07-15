@@ -1,7 +1,11 @@
 # XPTracker
-Tracks your Pit XP. <br>
+Displays prestige and level progress on your screen. <br>
 Mod is disabled by default, type /xptracker to access settings and to enable it. <br>
-You can also move the overlay anywhere on your screen by holding shift and dragging it!
+You can also move the overlay anywhere on your screen by holding shift and dragging it! <br>
+
+Here's the mod in action: <br>
+![overlay](https://cdn.discordapp.com/attachments/882425052434407506/1129769034469081249/image.png)
+![chat](https://cdn.discordapp.com/attachments/882425052434407506/1129768015345504408/image.png)
 
 ## Installing
 1. Install Forge 1.8.9.
