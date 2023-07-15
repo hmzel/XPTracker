@@ -109,12 +109,12 @@ class Overlay : UIContainer() {
             applyReplacements(
                 format,
                 mapOf(
-                    "%prestige%" to prestige.toString(),
-                    "%prestige_roman%" to StatTracker.INSTANCE.prestigeRoman,
-                    "%level%" to level.toString(),
-                    "%prestige_xp%" to String.format("%,.0f", currentPrestigeXP),
-                    "%prestige_xp_needed%" to String.format("%,.0f", currentPrestigeRequiredXP),
-                    "%prestige_xp_progress%" to String.format("%.2f", prestigePercent * 100),
+                    "{prestige}" to prestige.toString(),
+                    "{prestige_roman}" to StatTracker.INSTANCE.prestigeRoman,
+                    "{level}" to level.toString(),
+                    "{prestige_xp}" to String.format("%,.0f", currentPrestigeXP),
+                    "{prestige_xp_needed}" to String.format("%,.0f", currentPrestigeRequiredXP),
+                    "{prestige_xp_progress}" to String.format("%.2f", prestigePercent * 100),
                     "&" to "§"
                 )
             )
@@ -135,10 +135,10 @@ class Overlay : UIContainer() {
             applyReplacements(
                 format,
                 mapOf(
-                    "%level%" to level.toString(),
-                    "%level_xp%" to String.format("%,.0f", currentLevelXP),
-                    "%level_xp_needed%" to String.format("%,.0f", currentLevelRequiredXP),
-                    "%level_xp_progress%" to String.format("%.2f", levelPercent * 100),
+                    "{level}" to level.toString(),
+                    "{level_xp}" to String.format("%,.0f", currentLevelXP),
+                    "{level_xp_needed}" to String.format("%,.0f", currentLevelRequiredXP),
+                    "{level_xp_progress}" to String.format("%.2f", levelPercent * 100),
                     "&" to "§"
                 )
             )

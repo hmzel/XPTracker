@@ -60,14 +60,14 @@ public class Config extends Vigilant {
     public boolean prestigeProgression = true;
 
     @Property(
-        type = PropertyType.TEXT,
+        type = PropertyType.PARAGRAPH,
         name = "Prestige Progression Format",
         description = "The format of the prestige progression text.\n" +
             "Formatting codes can be used.\n" +
-            "Variables: %prestige%, %prestige_roman%, %prestige_xp%, %prestige_xp_needed%, %prestige_xp_progress%.",
+            "Variables: {prestige}, {prestige_roman}, {prestige_xp}, {prestige_xp_needed}, {prestige_xp_progress}.",
         category = "Overlay"
     )
-    public String prestigeProgressionFormat = "&7[&f%prestige_roman%&7] &a%prestige_xp%&7/&b%prestige_xp_needed% &7(&d%prestige_xp_progress%%&7)";
+    public String prestigeProgressionFormat = "&7[&f{prestige_roman}&7] &a{prestige_xp}&7/&b{prestige_xp_needed} &7(&d{prestige_xp_progress}%&7)";
 
 
     @Property(
@@ -79,14 +79,14 @@ public class Config extends Vigilant {
     public boolean levelProgression = true;
 
     @Property(
-        type = PropertyType.TEXT,
+        type = PropertyType.PARAGRAPH,
         name = "Level Progression Format",
         description = "The format of the level progression text.\n" +
             "Formatting codes can be used.\n" +
-            "Variables: %level%, %level_xp%, %level_xp_needed%, %level_xp_progress%.",
+            "Variables: {level}, {level_xp}, {level_xp_needed}, {level_xp_progress}.",
         category = "Overlay"
     )
-    public String levelProgressionFormat = "&7[&f%level%&7] &a%level_xp%&7/&b%level_xp_needed% &7(&d%level_xp_progress%%&7)";
+    public String levelProgressionFormat = "&7[&f{level}&7] &a{level_xp}&7/&b{level_xp_needed} &7(&d{level_xp_progress}%&7)";
 
     @Property(
         type = PropertyType.DECIMAL_SLIDER,
