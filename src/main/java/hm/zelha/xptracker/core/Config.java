@@ -89,6 +89,15 @@ public class Config extends Vigilant {
     public String levelProgressionFormat = "&7[&f{level}&7] &a{level_xp}&7/&b{level_xp_needed} &7(&d{level_xp_progress}%&7)";
 
     @Property(
+        type = PropertyType.SELECTOR,
+        name = "Text Alignment",
+        description = "The alignment of the text.",
+        category = "Overlay",
+        options = {"Left", "Right", "Center"}
+    )
+    public int overlayTextAlignment = 0;
+
+    @Property(
         type = PropertyType.DECIMAL_SLIDER,
         name = "X",
         category = "Overlay",

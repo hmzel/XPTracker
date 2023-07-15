@@ -2,9 +2,7 @@ package hm.zelha.xptracker.ui
 
 import gg.essential.elementa.components.UIContainer
 import gg.essential.elementa.components.UIText
-import gg.essential.elementa.constraints.ChildBasedMaxSizeConstraint
-import gg.essential.elementa.constraints.ChildBasedSizeConstraint
-import gg.essential.elementa.constraints.SiblingConstraint
+import gg.essential.elementa.constraints.*
 import gg.essential.elementa.dsl.childOf
 import gg.essential.elementa.dsl.constrain
 import gg.essential.elementa.dsl.pixels
@@ -19,10 +17,12 @@ class Overlay : UIContainer() {
     private var dragOffset = 0f to 0f
 
     private val prestigeProgress by UIText("Prestige Progress").constrain {
+        x = getTextXConstraint()
         y = SiblingConstraint()
     } childOf this
 
     private val levelProgress by UIText("Level Progress").constrain {
+        x = getTextXConstraint()
         y = SiblingConstraint()
     } childOf this
 
@@ -186,6 +186,20 @@ class Overlay : UIContainer() {
             if (format == "") return@registerListener
             if (!Config.INSTANCE.levelProgression) return@registerListener
             updateLevelProgressionText(format = format)
+        }
+
+        Config.INSTANCE.registerListener<Int>("overlayTextAlignment") { value ->
+            prestigeProgress.setX(getTextXConstraint(value))
+            levelProgress.setX(getTextXConstraint(value))
+        }
+    }
+
+    private fun getTextXConstraint(alignmentValue: Int = Config.INSTANCE.overlayTextAlignment): XConstraint {
+        return when (alignmentValue) {
+            0 -> 0.pixels() // Left
+            1 -> 0.pixels(alignOpposite = true) // Right
+            2 -> CenterConstraint() // Center
+            else -> 0.pixels()
         }
     }
 }
