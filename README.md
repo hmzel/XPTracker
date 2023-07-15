@@ -1,5 +1,5 @@
 # XPTracker
-Tracks your Pit XP.
+Tracks your Pit XP <br>
 Mod is disabled by default, type /xptracker to access settings and to enable it.
 
 ## Installing
