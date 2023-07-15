@@ -2,6 +2,7 @@
     "compatibilityLevel": "JAVA_8",
     "package": "hm.zelha.xptracker.mixin",
     "client": [
+        "MixinGuiIngame",
         "event.MixinGuiScreen"
     ],
     "verbose": true

@@ -19,6 +19,14 @@ public class Config extends Vigilant {
 
     @Property(
         type = PropertyType.SWITCH,
+        name = "Fix scoreboard spacing",
+        description = "Fixes the annoying space between the level brackets on the scoreboard. May cause issues with other server scoreboards.",
+        category = "General"
+    )
+    public boolean fixScoreboardSpacing = false;
+
+    @Property(
+        type = PropertyType.SWITCH,
         name = "Show progression in chat",
         description = "Whether or not the mod should show level progression in chat when the player gains XP.",
         category = "Chat Progression"
