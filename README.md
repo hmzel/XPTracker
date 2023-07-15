@@ -7,6 +7,7 @@ Tracks your Pit XP.
 3. Open the Artifacts.zip file and drag the `XPTracker.jar` file into your `.minecraft/mods` folder.
 
 ## Credits
+[![forthebadge](https://forthebadge.com/images/badges/made-with-crayons.svg)]()
 - [Debug's example mod](https://github.com/Debuggingss/ExampleMod/)
 - [Brooke](https://github.com/brooke-gill) - For helping with Pit XP shenanigans
 
