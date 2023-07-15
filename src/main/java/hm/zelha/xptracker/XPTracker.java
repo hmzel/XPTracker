@@ -2,6 +2,7 @@ package hm.zelha.xptracker;
 
 import hm.zelha.xptracker.command.ConfigCommand;
 import hm.zelha.xptracker.core.Config;
+import hm.zelha.xptracker.handler.ChatListener;
 import hm.zelha.xptracker.handler.OverlayRenderer;
 import hm.zelha.xptracker.handler.StatTracker;
 import net.minecraftforge.common.MinecraftForge;
@@ -25,7 +26,9 @@ public class XPTracker {
     public void init(FMLInitializationEvent event) {
         Config.INSTANCE.preload();
         new ConfigCommand().register();
+
         MinecraftForge.EVENT_BUS.register(StatTracker.INSTANCE);
         MinecraftForge.EVENT_BUS.register(OverlayRenderer.INSTANCE);
+        MinecraftForge.EVENT_BUS.register(new ChatListener());
     }
 }

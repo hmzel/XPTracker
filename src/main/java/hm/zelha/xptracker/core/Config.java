@@ -19,6 +19,23 @@ public class Config extends Vigilant {
 
     @Property(
         type = PropertyType.SWITCH,
+        name = "Show progression in chat",
+        description = "Whether or not the mod should show level progression in chat when the player gains XP.",
+        category = "Chat Progression"
+    )
+    public boolean chatProgression = true;
+
+    @Property(
+        type = PropertyType.NUMBER,
+        name = "Decimal Places",
+        description = "The number of decimal places to show in the chat progression message.",
+        category = "Chat Progression",
+        max = 10
+    )
+    public int chatProgressionDecimalPlaces = 2;
+
+    @Property(
+        type = PropertyType.SWITCH,
         name = "Only render in Pit",
         description = "Whether or not the overlay should only be shown in pit.",
         category = "Overlay"
