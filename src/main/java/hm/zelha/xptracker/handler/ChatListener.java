@@ -11,6 +11,17 @@ import java.util.regex.Pattern;
 public class ChatListener {
     private static final Pattern XP_PATTERN = Pattern.compile(".*§b\\+(?<xp>\\d+)XP.*");
 
+    public static double calculatePercent(double currentXP, double requiredXP, int gainedXP, int decimalPlaces) {
+        double oldPercent = floorToDecimalPlaces(currentXP / requiredXP * 100, decimalPlaces);
+        double newPercent = floorToDecimalPlaces((currentXP + gainedXP) / requiredXP * 100, decimalPlaces);
+        return (newPercent * 100 - oldPercent * 100) / 100;
+    }
+
+    private static double floorToDecimalPlaces(double value, int decimalPlaces) {
+        double factor = Math.pow(10, decimalPlaces);
+        return Math.floor(value * factor) / factor;
+    }
+
     @SubscribeEvent
     public void onChat(ClientChatReceivedEvent event) {
         StatTracker statTracker = StatTracker.INSTANCE;
@@ -19,20 +30,23 @@ public class ChatListener {
         if (!matcher.matches()) return;
 
         int xp = Integer.parseInt(matcher.group("xp"));
-        double percent;
+        double requiredXP;
+        double currentXP;
 
         if (Config.INSTANCE.chatProgressionType == 0) { // 0 = Level
-            double currentLevelRequiredXP = XPCalculator.getNeededXPForLevel(statTracker.getPrestige(), statTracker.getLevel());
-            percent = xp / currentLevelRequiredXP;
+            requiredXP = XPCalculator.getNeededXPForLevel(statTracker.getPrestige(), statTracker.getLevel());
+            currentXP = XPCalculator.getNeededXPForLevel(statTracker.getPrestige(), statTracker.getLevel()) - statTracker.getXpToNextLevel();
         } else { // 1 = Prestige
-            double currentPrestigeRequiredXP = XPCalculator.getTotalPrestigeXP(statTracker.getPrestige());
-            percent = xp / currentPrestigeRequiredXP;
+            requiredXP = XPCalculator.getTotalPrestigeXP(statTracker.getPrestige());
+            currentXP = XPCalculator.getTotalXPForLevelAtPrestige(statTracker.getPrestige(), statTracker.getLevel(), statTracker.getXpToNextLevel());
         }
+
+        double percent = calculatePercent(currentXP, requiredXP, xp, Config.INSTANCE.chatProgressionDecimalPlaces);
 
         @SuppressWarnings("MalformedFormatString")
         String levelPercentString = String.format(
             "%." + Config.INSTANCE.chatProgressionDecimalPlaces + "f",
-            percent * 100
+            percent
         );
         event.message.appendText(" §r§7(§b+" + levelPercentString + "%§7)§r");
     }

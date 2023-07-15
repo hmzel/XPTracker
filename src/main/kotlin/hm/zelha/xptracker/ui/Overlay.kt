@@ -11,10 +11,15 @@ import gg.essential.universal.UKeyboard
 import hm.zelha.xptracker.core.Config
 import hm.zelha.xptracker.handler.StatTracker
 import hm.zelha.xptracker.util.XPCalculator
+import java.math.RoundingMode
+import java.text.DecimalFormat
 
 class Overlay : UIContainer() {
     private var isDragging = false
     private var dragOffset = 0f to 0f
+    private val percentFormat = DecimalFormat("##.##").also {
+        it.roundingMode = RoundingMode.FLOOR
+    }
 
     private val prestigeProgress by UIText("Prestige Progress").constrain {
         x = getTextXConstraint()
@@ -115,7 +120,7 @@ class Overlay : UIContainer() {
                     "{level}" to level.toString(),
                     "{prestige_xp}" to String.format("%,.0f", currentPrestigeXP),
                     "{prestige_xp_needed}" to String.format("%,.0f", currentPrestigeRequiredXP),
-                    "{prestige_xp_progress}" to String.format("%.2f", prestigePercent * 100),
+                    "{prestige_xp_progress}" to percentFormat.format(prestigePercent * 100),
                     "&" to "§",
                     "§l" to "" // For some reason using bold text breaks alignment, so we just remove it
                 )
@@ -142,7 +147,7 @@ class Overlay : UIContainer() {
                     "{formatted_level}" to formattedLevel,
                     "{level_xp}" to String.format("%,.0f", currentLevelXP),
                     "{level_xp_needed}" to String.format("%,.0f", currentLevelRequiredXP),
-                    "{level_xp_progress}" to String.format("%.2f", levelPercent * 100),
+                    "{level_xp_progress}" to percentFormat.format(levelPercent * 100),
                     "&" to "§",
                     "§l" to "" // For some reason using bold text breaks alignment, so we just remove it
                 )
