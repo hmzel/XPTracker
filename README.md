@@ -1,5 +1,6 @@
 # XPTracker
 Tracks your Pit XP.
+Mod is disabled by default, type /xptracker to access settings and to enable it.
 
 ## Installing
 1. Install Forge 1.8.9.
