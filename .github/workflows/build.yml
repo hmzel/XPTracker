@@ -33,7 +33,7 @@ jobs:
                     name: Jar
                     path: |
                         build/libs/xptracker-*.jar
-                        build/libs/xptracker-*-dev.jar
+                        !build/libs/xptracker-*-dev.jar
             -   name: Unit Tests
                 run: ./gradlew test
             -   name: Publish Test Report
