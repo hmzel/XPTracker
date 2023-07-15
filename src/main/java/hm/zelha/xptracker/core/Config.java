@@ -1,10 +1,11 @@
 package hm.zelha.xptracker.core;
 
 import gg.essential.vigilance.Vigilant;
-import gg.essential.vigilance.data.Property;
-import gg.essential.vigilance.data.PropertyType;
+import gg.essential.vigilance.data.*;
+import org.jetbrains.annotations.NotNull;
 
 import java.io.File;
+import java.util.Comparator;
 
 public class Config extends Vigilant {
     public static final Config INSTANCE = new Config();
@@ -104,7 +105,22 @@ public class Config extends Vigilant {
     public float y = 8;
 
     public Config() {
-        super(new File("./config/xptracker.toml"));
+        super(
+            new File("./config/xptracker.toml"),
+            "XP Tracker",
+            new JVMAnnotationPropertyCollector(),
+            new SortingBehavior() {
+                @NotNull
+                @Override
+                public Comparator<? super Category> getCategoryComparator() {
+                    return Comparator.comparing(category -> {
+                        if (category.getName().equals("General")) return -1;
+                        return 0;
+                    });
+                }
+            }
+        );
+
         initialize();
     }
 }
