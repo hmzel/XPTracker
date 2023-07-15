@@ -3,8 +3,8 @@ Tracks your Pit XP.
 
 ## Installing
 1. Install Forge 1.8.9.
-2. Download the [latest version](https://nightly.link/hmzel/XPTracker/workflows/build/master/Artifacts.zip) of the mod.
-3. Open the Artifacts.zip file and drag the `XPTracker.jar` file into your `.minecraft/mods` folder.
+2. Download the [latest version](https://nightly.link/hmzel/XPTracker/workflows/build/master/Jar.zip) of the mod.
+3. Open the Artifacts.zip file and drag the `xptracker-x.x.x.jar` file into your `.minecraft/mods` folder.
 
 ## Credits
 [![forthebadge](https://forthebadge.com/images/badges/made-with-crayons.svg)]()
