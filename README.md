@@ -1,6 +1,7 @@
 # XPTracker
-Tracks your Pit XP <br>
-Mod is disabled by default, type /xptracker to access settings and to enable it.
+Tracks your Pit XP. <br>
+Mod is disabled by default, type /xptracker to access settings and to enable it. <br>
+You can also move the overlay anywhere on your screen by holding shift and dragging it!
 
 ## Installing
 1. Install Forge 1.8.9.
