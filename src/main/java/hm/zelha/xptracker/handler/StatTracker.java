@@ -8,6 +8,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.scoreboard.ScoreObjective;
 import net.minecraft.scoreboard.ScorePlayerTeam;
 import net.minecraft.scoreboard.Scoreboard;
+import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.world.World;
 import net.minecraftforge.common.MinecraftForge;
@@ -25,7 +26,7 @@ import java.util.stream.Collectors;
 public class StatTracker {
     public static final StatTracker INSTANCE = new StatTracker();
     private static final Pattern FORMATTED_LEVEL_PATTERN = Pattern.compile("^Level: (?<value>.+)$");
-    private static final Pattern LEVEL_PATTERN = Pattern.compile("^Level: \\[(?<value>\\d{1,3})]$");
+    private static final Pattern LEVEL_PATTERN = Pattern.compile("^Level: \\[(?<value>\\d{1,3})].*");
     private static final Pattern PRESTIGE_PATTERN = Pattern.compile("^Prestige: (?<value>\\w+)$");
     private static final Pattern NEEDED_XP_PATTERN = Pattern.compile("^Needed XP: (?<value>[\\d,]+|MAXED)$");
 
@@ -51,7 +52,8 @@ public class StatTracker {
         String prestigeRaw = getScoreboardValue(lines, PRESTIGE_PATTERN); // This can be null if the player has not prestiged
         String levelRaw = getScoreboardValue(lines, LEVEL_PATTERN);
         String neededXPRaw = getScoreboardValue(lines, NEEDED_XP_PATTERN);
-        String newFormattedLevel = getScoreboardValue(formattedLines, FORMATTED_LEVEL_PATTERN);
+        String newFormattedLevel = getScoreboardValue(formattedLines, FORMATTED_LEVEL_PATTERN).replaceAll("( §b♆| §c♨)", "");
+
         if (levelRaw == null || neededXPRaw == null || formattedLevel == null) return;
 
         int newPrestige = RomanNumerals.getIntFromNumeral(prestigeRaw);
