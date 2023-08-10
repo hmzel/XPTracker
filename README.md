@@ -9,11 +9,10 @@ Here's the mod in action: <br>
 
 ## Installing
 1. Install Forge 1.8.9.
-2. Download the [latest version](https://nightly.link/hmzel/XPTracker/workflows/build/master/Jar.zip) of the mod.
-3. Open the Artifacts.zip file and drag the `xptracker-x.x.x.jar` file into your `.minecraft/mods` folder.
+2. Download the [latest version](https://github.com/hmzel/XPTracker/releases/download/v1.0.1/xptracker-1.0.1.jar) of the mod.
+3. Drag the `xptracker-x.x.x.jar` file into your `.minecraft/mods` folder.
 
 ## Credits
-[![forthebadge](https://forthebadge.com/images/badges/made-with-crayons.svg)]()
 - [Debug's example mod](https://github.com/Debuggingss/ExampleMod/)
 - [Brooke](https://github.com/brooke-gill) - For helping with Pit XP shenanigans
 
