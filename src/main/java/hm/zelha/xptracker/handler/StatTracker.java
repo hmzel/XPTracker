@@ -28,7 +28,7 @@ public class StatTracker {
     private static final Pattern FORMATTED_LEVEL_PATTERN = Pattern.compile("^Level: (?<value>.+)$");
     private static final Pattern LEVEL_PATTERN = Pattern.compile("^Level: \\[(?<value>\\d{1,3})].*");
     private static final Pattern PRESTIGE_PATTERN = Pattern.compile("^Prestige: (?<value>\\w+)$");
-    private static final Pattern NEEDED_XP_PATTERN = Pattern.compile("^Needed XP: (?<value>[\\d,]+|MAXED)$");
+    private static final Pattern NEEDED_XP_PATTERN = Pattern.compile("^Needed XP: (?<value>[\\d,]+|MAXED!)$");
 
     @Getter private String prestigeRoman = "";
     @Getter private int prestige = 0;
@@ -60,7 +60,7 @@ public class StatTracker {
         int newLevel = Integer.parseInt(levelRaw);
 
         double newXpToNextLevel;
-        if (neededXPRaw.equals("MAXED")) {
+        if (neededXPRaw.equals("MAXED!")) {
             newXpToNextLevel = 0;
         } else {
             newXpToNextLevel = Double.parseDouble(neededXPRaw.replace(",", ""));
