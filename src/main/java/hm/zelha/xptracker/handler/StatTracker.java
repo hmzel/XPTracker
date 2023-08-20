@@ -52,7 +52,11 @@ public class StatTracker {
         String prestigeRaw = getScoreboardValue(lines, PRESTIGE_PATTERN); // This can be null if the player has not prestiged
         String levelRaw = getScoreboardValue(lines, LEVEL_PATTERN);
         String neededXPRaw = getScoreboardValue(lines, NEEDED_XP_PATTERN);
-        String newFormattedLevel = getScoreboardValue(formattedLines, FORMATTED_LEVEL_PATTERN).replaceAll("( §b♆| §c♨)", "");
+        String newFormattedLevel = getScoreboardValue(formattedLines, FORMATTED_LEVEL_PATTERN);
+
+        if (newFormattedLevel != null) {
+            newFormattedLevel = newFormattedLevel.replaceAll("( §b♆| §c♨)", "");
+        }
 
         if (levelRaw == null || neededXPRaw == null || formattedLevel == null) return;
 
