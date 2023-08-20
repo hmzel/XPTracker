@@ -9,7 +9,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class ChatListener {
-    private static final Pattern XP_PATTERN = Pattern.compile(".*§b\\+(?<xp>\\d+) ?XP.*");
+    private static final Pattern XP_PATTERN = Pattern.compile(".*§b(?<xp>\\d+(,\\d+)?) ?XP.*");
 
     public static double calculatePercent(double currentXP, double requiredXP, int gainedXP, int decimalPlaces) {
         double oldPercent = floorToDecimalPlaces(currentXP / requiredXP * 100, decimalPlaces);
